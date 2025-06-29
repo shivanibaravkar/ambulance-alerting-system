@@ -33,7 +33,7 @@ To reduce ambulance delays during emergencies by utilizing real-time location, m
 ## 📸 Demo Screenshots
 
 ### 🔹 Login Page
-![Login Page](screenshots/login.png)
+![Login Page](C:\Users\admin\Desktop\project\Ambulance-Alerting-System-main\screenshots)
 
 ### 🔹 Driver Map View with Hospital Search
 ![Driver Page](screenshots/map1.png)
