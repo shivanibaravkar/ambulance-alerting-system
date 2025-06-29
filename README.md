@@ -30,16 +30,16 @@ To reduce ambulance delays during emergencies by utilizing real-time location, m
 
 ---
 
-## 📸 Demo Screenshots
+## Demo Screenshots
 
-### 🔹 Login Page
-![Login Page](screenshots/login.png)
+### 🔐 Login Page  
+![Login Page](https://github.com/shivanibaravkar/ambulance-alerting-system/blob/main/screenshots/login.png?raw=true)
 
-### 🔹 Driver Map View with Hospital Search
-![Driver Page](screenshots/map1.png)
+### 🗺️ Driver Map View with Hospital Search  
+![Map 1](https://github.com/shivanibaravkar/ambulance-alerting-system/blob/main/screenshots/map1.png?raw=true)
 
-### 🔹 Alternate View – Different Hospitals on Map
-![Map View 2](screenshots/map2.png)
+### 🏥 Alternate View – Different Hospitals on Map  
+![Map 2](https://github.com/shivanibaravkar/ambulance-alerting-system/blob/main/screenshots/map2.png?raw=true)
 
 ---
 
