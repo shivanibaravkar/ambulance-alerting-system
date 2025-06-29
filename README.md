@@ -44,3 +44,38 @@ To reduce ambulance delays during emergencies by utilizing real-time location, m
 ---
 
 ## 📁 Folder Structure
+ambulance-alerting-system-main/
+├── Ambulance-Alerting-System.py
+├── README.md
+├── templates/
+├── static/
+├── screenshots/
+│   ├── login.png
+│   ├── map1.png
+│   └── map2.png
+
+
+---
+
+## ▶️ How to Run Locally
+
+1. Clone the repository or download ZIP
+2. Install required packages:
+```bash
+pip install flask mysql-connector-python
+3.run locally
+python Ambulance-Alerting-System.py
+
+📦 Requirements
+flask
+mysql-connector-python
+
+🔗 GitHub Repository
+https://github.com/shivanibaravkar/ambulance-alerting-system
+
+🙌 Author
+Shivani Baravkar
+Final Year CSE + DS Student
+Passionate about real-world problem-solving with technology.
+
+
