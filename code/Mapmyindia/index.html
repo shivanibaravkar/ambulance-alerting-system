@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>MapmyIndia Plugin - Direction Plugin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MapmyIndia Direction Plugin">
+    <script src="https://apis.mapmyindia.com/advancedmaps/v1/cda4cc16488645f1d41babcc561ed29a/map_load?v=1.5"></script>
+    <script src="https://apis.mapmyindia.com/advancedmaps/api/cda4cc16488645f1d41babcc561ed29a/map_sdk_plugins"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #map {
+            width: 500px;
+            height: 500px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #nearby_search {
+            width: 500px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nearby_search" style="margin: 5px; width: 99%; height: 250px; overflow-y: auto; border-radius: 10px;"></div>
+    <div id="map"></div>
+    <div id="direction"></div>
+
+    <script>
+        var lat = 19.185404, log = 73.240060;
+
+        // Getting Geolocation using
+        navigator.geolocation.getCurrentPosition(showPosition, handleError);
+
+        function showPosition(position) {
+            lat = position.coords.latitude;
+            log = position.coords.longitude;
+            console.log(lat);
+            console.log(log);
+
+            initializeMap(); // Initialize the map after getting location
+        }
+
+        function handleError(error) {
+            console.error("Geolocation error: ", error);
+        }
+
+        function initializeMap() {
+            /* Map Initialization */
+            var map = new MapmyIndia.Map('map', { center: [lat, log], zoom: 10, search: false });
+
+            var options = {
+                divId: 'nearby_search',
+                map: map,
+                keywords: 'Hospital',
+                refLocation: [lat, log],
+                fitbounds: true,
+                click_callback: function (d) {
+                    console.log(d);
+                    update_direction(d["latitude"], d["longitude"]);
+                }
+            }
+
+            var nr = MapmyIndia.nearby(options);
+            console.log(nr);
+        }
+
+        /* Direction plugin initialization */
+        function update_direction(lat1, log1) {
+            var direction_option = {
+                map: map,
+                start: lat + ',' + log,
+                end: lat1 + ',' + log1,
+                resource: 'route_traffic',
+                callback: function (data) { console.log(data); }
+            }
+
+            var direction_plugin = MapmyIndia.direction(direction_option);
+        }
+    </script>
+</body>
+
+</html>

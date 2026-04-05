@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapmyIndia Nearby Search</title>
+    <script src="https://apis.mapmyindia.com/advancedmaps/api/d22f9717f5b026ce6c6ab49e8139500d/map_load?v=1.5"></script>
+    <script src="https://apis.mapmyindia.com/advancedmaps/api/d22f9717f5b026ce6c6ab49e8139500d/map_sdk_plugins?v=3.0&libraries=nearby"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+        #nearby_search {
+            width: 100%;
+            height: 250px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+    <div id="nearby_search"></div>
+
+    <script>
+        var lat = 28.6139; // Default latitude
+        var lng = 77.2090; // Default longitude
+
+        // Getting Geolocation
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+        function showPosition(position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+
+            // Initialize Map
+            var map = new MapmyIndia.Map('map', {
+                center: [lat, lng],
+                zoom: 14
+            });
+
+            // Set up nearby search options
+            var options = {
+                divId: 'nearby_search',
+                map: map,
+                keywords: 'Hospital', // Change this to your desired search term
+                refLocation: [lat, lng],
+                fitbounds: true,
+                click_callback: function (data) {
+                    console.log(data);
+                    updateDirection(data["placeName"], data["eLoc"]); // Call a function to handle click events
+                }
+            };
+
+            // Initialize nearby search
+            MapmyIndia.nearby(options);
+        }
+
+        // Function to handle direction updates
+        function updateDirection(placeName, eloc) {
+            // You can implement direction logic here
+            alert('Clicked on: ' + placeName);
+        }
+    </script>
+</body>
+</html>
