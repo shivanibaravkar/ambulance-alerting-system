@@ -6,6 +6,21 @@ from discordwebhook import Discord
 
 # Load environment variables
 load_dotenv()
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_NAME = os.getenv("DB_NAME")
+DB_PORT = int(os.getenv("DB_PORT", 3306))
+
+def get_db_connection():
+    return pymysql.connect(
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME,
+        port=DB_PORT
+    )
+
 
 token = os.getenv('TOKEN')
 disc = Discord(url=os.getenv('Trafic_webhook'))
@@ -20,12 +35,8 @@ def home():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        db = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="AmbulanceAlertingSystem"
-        )
+        db = get_db_connection()
+        
         cursor = db.cursor()
 
         sql = "SELECT proffession FROM user WHERE email_id=%s and password=%s;"
@@ -55,12 +66,7 @@ def admin():
         proffession = request.form.get("proffession")
         password = request.form.get("password")
 
-        db = pymysql.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="AmbulanceAlertingSystem"
-        )
+        db = get_db_connection()
         cursor = db.cursor()
 
         sql = "INSERT INTO user(name,Email_Id,proffession,password) VALUES(%s,%s,%s,%s);"
@@ -98,7 +104,7 @@ def admin():
 # ---------------- HOSPITAL ----------------
 @app.route('/hospital', methods=['GET', 'POST'])
 def hospital():
-    db = pymysql.connect(host="localhost", user="root", password="", database="AmbulanceAlertingSystem")
+    db = get_db_connection()
     cursor = db.cursor()
 
     cursor.execute('SELECT hospital_name,accept_patient FROM hospital')
@@ -118,7 +124,7 @@ def hospital():
 # ---------------- TRAFFIC ----------------
 @app.route('/traffic-police', methods=['GET', 'POST'])
 def traffic_poice():
-    db = pymysql.connect(host="localhost", user="root", password="", database="AmbulanceAlertingSystem")
+    db = get_db_connection()
     cursor = db.cursor()
 
     cursor.execute('SELECT DISTINCT location,s_s_status FROM trafficsignal')
@@ -138,7 +144,7 @@ def traffic_poice():
 # ---------------- AMBULANCE ----------------
 @app.route('/ambulance-drive', methods=["GET", "POST"])
 def ambulancepage():
-    db = pymysql.connect(host="localhost", user="root", password="", database="AmbulanceAlertingSystem")
+    db = get_db_connection()
     cursor = db.cursor()
 
     cursor.execute('SELECT f_rom,t_o from trafficsignal')
